@@ -5,6 +5,7 @@ from matplotlib import font_manager
 import squarify
 from scipy.cluster import hierarchy
 import numpy as np
+import os  # 添加这个导入
 
 # 设置中文字体
 font_path = 'C:/Windows/Fonts/simhei.ttf'  # 确保在您的环境中安装了该字体
