@@ -7,11 +7,12 @@ from scipy.cluster import hierarchy
 import numpy as np
 
 # 设置中文字体
-if plt.get_backend() == 'TkAgg':
-    font_path = 'C:/Windows/Fonts/simhei.ttf'  # 确保在您的环境中安装了该字体
-    font_manager.fontManager.addfont(font_path)
-    plt.rcParams['font.sans-serif'] = ['SimHei']  # 用黑体显示中文
-    plt.rcParams['axes.unicode_minus'] = False  # 正常显示负号
+font_path = 'C:/Windows/Fonts/simhei.ttf'  # 确保在您的环境中安装了该字体
+if not os.path.exists(font_path):
+    font_path = '/usr/share/fonts/truetype/arphic/ukai.ttc'  # Linux 环境中的字体路径
+font_manager.fontManager.addfont(font_path)
+plt.rcParams['font.sans-serif'] = ['SimHei', 'AR PL UKai CN']  # 用黑体和 AR PL UKai CN 显示中文
+plt.rcParams['axes.unicode_minus'] = False  # 正常显示负号
 
 def create_histogram(data, column, title):
     """
