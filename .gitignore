@@ -1,0 +1,132 @@
+# 依赖目录
+/node_modules
+/frontend/node_modules
+/backend/venv
+
+# 构建输出
+/dist
+/build
+/frontend/dist
+/frontend/build
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/backend/*.log
+
+# 运行时数据
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 目录用于打包的工具
+.npm
+.eslintcache
+.yarn-integrity
+
+# 可选的 npm 缓存目录
+.npm
+
+# 可选的 REPL 历史
+.node_repl_history
+
+# 输出的 'debug' 文件夹
+debug
+
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows 系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 编辑器配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python 相关
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Electron 相关
+/out
+
+# 测试覆盖率
+coverage
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+*.swp
+*~.nib
+*.db
+*.sqlite
+
+# OS 生成的文件
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 包文件
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# 日志和数据库
+*.log
+*.sql
+*.sqlite
+
+# 其他
+.cache
+.history
+.sass-cache

@@ -1,0 +1,69 @@
+{
+  "name": "data-analysis-visualization-app",
+  "version": "1.0.0",
+  "description": "数据分析与可视化桌面应用",
+  "main": "electron.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "electron-dev": "npm run dev && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "build": {
+    "appId": "com.yourcompany.insightwave",
+    "productName": "InsightWave",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist/**/*",
+      "electron.js",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "your-github-username",
+        "repo": "your-repo-name"
+      }
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.5.1",
+    "css-loader": "^5.2.6",
+    "electron": "^13.6.9",
+    "electron-builder": "^22.14.13",
+    "html-webpack-plugin": "^5.3.1",
+    "style-loader": "^2.0.0",
+    "wait-on": "^5.3.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
+    "axios": "^0.21.1",
+    "chart.js": "^3.3.2",
+    "electron-updater": "^6.3.4",
+    "react": "^17.0.2",
+    "react-chartjs-2": "^3.0.3",
+    "react-dom": "^17.0.2",
+    "react-dropzone": "^14.2.3"
+  }
+}
