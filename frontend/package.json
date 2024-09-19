@@ -12,7 +12,8 @@
     "build": "webpack --mode production",
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder",
+    "test": "echo \"No tests specified\" && exit 0"  // 添加这个占位符脚本
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
