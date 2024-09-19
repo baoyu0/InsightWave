@@ -34,8 +34,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "your-github-username",
-        "repo": "your-repo-name"
+        "owner": "baoyu0",
+        "repo": "InsightWave"
       }
     ]
   },
