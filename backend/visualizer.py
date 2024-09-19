@@ -11,8 +11,11 @@ import os  # 添加这个导入
 font_path = 'C:/Windows/Fonts/simhei.ttf'  # 确保在您的环境中安装了该字体
 if not os.path.exists(font_path):
     font_path = '/usr/share/fonts/truetype/arphic/ukai.ttc'  # Linux 环境中的字体路径
-font_manager.fontManager.addfont(font_path)
-plt.rcParams['font.sans-serif'] = ['SimHei', 'AR PL UKai CN']  # 用黑体和 AR PL UKai CN 显示中文
+if os.path.exists(font_path):
+    font_manager.fontManager.addfont(font_path)
+    plt.rcParams['font.sans-serif'] = ['SimHei', 'AR PL UKai CN']  # 用黑体和 AR PL UKai CN 显示中文
+else:
+    plt.rcParams['font.sans-serif'] = ['sans-serif']  # 使用默认字体
 plt.rcParams['axes.unicode_minus'] = False  # 正常显示负号
 
 def create_histogram(data, column, title):
