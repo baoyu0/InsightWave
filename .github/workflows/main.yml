@@ -1,0 +1,9 @@
+jobs:
+  build:
+    # ... 其他配置 ...
+    steps:
+      # ... 其他步骤 ...
+      - name: Build and publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npm run dist
