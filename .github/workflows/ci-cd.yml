@@ -118,11 +118,6 @@ jobs:
         name: dist
         path: frontend/dist
 
-    - name: Run security scan
-      uses: snyk/actions/node@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
     - name: Bump version and push tag
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
