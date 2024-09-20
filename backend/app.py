@@ -180,7 +180,7 @@ def perform_regression_analysis():
 
 
 @app.route("/api/time_series", methods=["POST"])
-def perform_time_series_analysis():
+def time_series_analysis_route():
     try:
         data = request.json.get("data")
         column = request.json.get("column")

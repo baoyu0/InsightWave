@@ -22,9 +22,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
 
 
 def create_histogram(data, column, title):
-    """
-    创建直方图
-    """
+    """创建直方图"""
     plt.figure(figsize=(10, 6))
     if isinstance(data, dict) and column in data:
         sns.histplot(data[column], kde=True)
@@ -39,9 +37,7 @@ def create_histogram(data, column, title):
 
 
 def create_scatter_plot(data, x_column, y_column, title):
-    """
-    创建散点图
-    """
+    """创建散点图"""
     plt.figure(figsize=(10, 6))
     sns.scatterplot(data=data, x=x_column, y=y_column)
     plt.title(title)
@@ -51,9 +47,7 @@ def create_scatter_plot(data, x_column, y_column, title):
 
 
 def create_line_plot(data, x_column, y_column, title):
-    """
-    创建折线图
-    """
+    """创建折线图"""
     plt.figure(figsize=(10, 6))
     sns.lineplot(data=data, x=x_column, y=y_column)
     plt.title(title)
@@ -63,9 +57,7 @@ def create_line_plot(data, x_column, y_column, title):
 
 
 def create_pie_chart(data, column, title):
-    """
-    创建饼图
-    """
+    """创建饼图"""
     plt.figure(figsize=(10, 6))
     if isinstance(data, dict) and column in data:
         pd.Series(data[column]).value_counts().plot(kind="pie", autopct="%1.1f%%")
@@ -78,9 +70,7 @@ def create_pie_chart(data, column, title):
 
 
 def create_box_plot(data, column, title):
-    """
-    创建箱线图
-    """
+    """创建箱线图"""
     plt.figure(figsize=(10, 6))
     if isinstance(data, dict):
         data = pd.DataFrame(data)
@@ -99,9 +89,7 @@ def create_box_plot(data, column, title):
 
 
 def create_heatmap(data, title):
-    """
-    创建热力图
-    """
+    """创建热力图"""
     plt.figure(figsize=(12, 10))
     sns.heatmap(data.corr(), annot=True, cmap="coolwarm")
     plt.title(title)
@@ -109,9 +97,7 @@ def create_heatmap(data, title):
 
 
 def create_scatter_matrix(data, columns, title):
-    """
-    创建散点矩阵
-    """
+    """创建散点矩阵"""
     plt.figure(figsize=(12, 10))
     sns.pairplot(data[columns])
     plt.suptitle(title, y=1.02)
@@ -119,9 +105,7 @@ def create_scatter_matrix(data, columns, title):
 
 
 def create_tree_map(data, values, labels, title):
-    """
-    创建树状图
-    """
+    """创建树状图"""
     plt.figure(figsize=(12, 8))
     squarify.plot(sizes=values, label=labels, alpha=0.8)
     plt.title(title)
@@ -130,9 +114,7 @@ def create_tree_map(data, values, labels, title):
 
 
 def create_dendrogram(data, column, title):
-    """
-    创建树状图（层次聚类树状图）
-    """
+    """创建树状图（层次聚类树状图）"""
     plt.figure(figsize=(12, 8))
     if isinstance(data, dict):
         data = pd.DataFrame(data)
