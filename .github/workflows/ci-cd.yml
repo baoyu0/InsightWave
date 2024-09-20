@@ -51,7 +51,15 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
-        npm run dist:${{ matrix.os }} || (echo "Build failed" && exit 1)
+        echo "Node version: $(node -v)"
+        echo "NPM version: $(npm -v)"
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+        echo "Package.json contents:"
+        cat package.json
+        echo "Running npm run dist:${{ matrix.os }}"
+        npm run dist:${{ matrix.os }} || (echo "Build failed with error code $?" && npm run dist:${{ matrix.os }} --verbose && exit 1)
       shell: bash
 
     - name: Upload artifacts
