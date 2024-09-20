@@ -31,6 +31,17 @@ jobs:
         git config --global user.email 'github-actions@github.com'
       shell: bash
 
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm ci
+      shell: bash
+
+    - name: Update version
+      run: |
+        cd frontend
+        npx version-bump-prompt --commit --tag --push
+      shell: bash
     - name: Update version
       run: |
         cd frontend
@@ -67,6 +78,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
+        npm ci
         npm run dist:windows
       shell: bash
 
