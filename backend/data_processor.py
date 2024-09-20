@@ -1,4 +1,5 @@
 import pandas as pd
+
 # 删除这行: import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
@@ -45,7 +46,7 @@ def perform_regression(data, x_columns, y_column):
     return {
         "coefficients": coefficients,
         "intercept": intercept,
-        "r_squared": r_squared
+        "r_squared": r_squared,
     }
 
 
@@ -58,7 +59,7 @@ def perform_time_series_analysis(data, column, periods=1):
     forecast = results.forecast(steps=periods)
     return {
         "forecast": forecast.tolist(),
-        "confidence_interval": results.conf_int(alpha=0.05).tolist()
+        "confidence_interval": results.conf_int(alpha=0.05).tolist(),
     }
 
 
