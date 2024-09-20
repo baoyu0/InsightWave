@@ -118,9 +118,19 @@ jobs:
         name: dist
         path: frontend/dist
 
+    - name: Commit all changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff-index --quiet HEAD || git commit -m "Auto-commit changes"
+
     - name: Bump version and push tag
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        cd frontend  # 确保在正确的目录中执行 npm 命令
         npm version patch
         git push --follow-tags
 
