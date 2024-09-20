@@ -63,18 +63,14 @@
         "nsis"
       ]
     },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "baoyu0",
-        "repo": "InsightWave"
-      }
-    ],
     "publish": {
       "provider": "github",
-      "releaseType": "release"
+      "owner": "baoyu0",
+      "repo": "InsightWave"
     }
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "name": "insightwave",
+  "version": "1.0.0"
 }
