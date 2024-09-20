@@ -33,9 +33,12 @@
       "package.json"
     ],
     "win": {
-       "target": ["nsis", "msi"],
-       "icon": "build/icon.ico"
-     }
+      "target": [
+        "nsis",
+        "msi"
+      ],
+      "icon": "build/icon.ico"
+    }, 
     "publish": [
       {
         "provider": "github",
