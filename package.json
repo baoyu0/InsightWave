@@ -42,9 +42,7 @@
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder --publish always",
-    "dist:debug": "npm run build && electron-builder --publish always --config.debug=true",
-    "test": "echo \"No tests specified\" && exit 0",
-    "lint": "eslint src/**/*.js"
+    "dist:debug": "set DEBUG=electron-builder,electron-builder:* && npm run build && electron-builder --publish always"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
