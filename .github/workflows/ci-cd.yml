@@ -36,17 +36,29 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-    - name: Run Python tests
+    - name: Format Python code
       run: |
-        cd backend
-        python -m unittest discover tests
+        pip install black
+        black backend
+
+    - name: Commit formatted code
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff-index --quiet HEAD || git commit -m "Auto-format Python code"
 
     - name: Run Python linter
       run: |
         pip install flake8
         flake8 backend
 
-    - name: Set up Node.js
+    - name: Run Python tests
+      run: |
+        cd backend
+        python -m unittest discover tests
+
+    - name: Run Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
@@ -108,7 +120,9 @@ jobs:
         npm version patch
         git push --follow-tags
 
-    - name: Format Python code
-      run: |
-        pip install black
-        black backend
+    - name: Push changes
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
