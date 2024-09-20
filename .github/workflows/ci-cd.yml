@@ -11,14 +11,10 @@ permissions:
 
 env:
   NODE_VERSION: '20'
-  PYTHON_VERSION: '3.9'
 
 jobs:
-  build-linux-windows:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+  build-windows:
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
 
@@ -34,7 +30,7 @@ jobs:
         npm ci
       shell: bash
 
-    - name: Build and Publish Electron app
+    - name: Build Electron app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -43,66 +39,30 @@ jobs:
         echo "NPM version: $(npm -v)"
         echo "Current directory: $(pwd)"
         echo "Directory contents:"
-        ls -la
+        dir
         echo "Package.json contents:"
-        cat package.json
-        echo "Running npm run dist:${{ matrix.os }}"
-        npm run dist:${{ matrix.os }} || (echo "Build failed with error code $?" && npm run dist:${{ matrix.os }} --verbose && exit 1)
-      shell: bash
+        type package.json
+        echo "Running npm run dist:windows"
+        npm run dist:windows || (echo "Build failed with error code $?" && npm run dist:windows --verbose && exit 1)
+      shell: powershell
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: dist-${{ matrix.os }}
-        path: frontend/dist
-
-  build-macos:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-
-    - name: Install dependencies
-      run: |
-        npm install -g npm@latest
-        cd frontend
-        npm ci
-
-    - name: Build and Publish Electron app
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        cd frontend
-        echo "Node version: $(node -v)"
-        echo "NPM version: $(npm -v)"
-        echo "Current directory: $(pwd)"
-        echo "Directory contents:"
-        ls -la
-        echo "Package.json contents:"
-        cat package.json
-        echo "Running npm run dist:macos-latest"
-        npm run dist:macos-latest || (echo "Build failed with error code $?" && npm run dist:macos-latest --verbose && exit 1)
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: dist-macos-latest
+        name: dist-windows
         path: frontend/dist
 
   release:
-    needs: [build-linux-windows, build-macos]
+    needs: build-windows
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v4
 
-    - name: Download all artifacts
+    - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
+        name: dist-windows
         path: artifacts
 
     - name: Create Release
@@ -111,22 +71,17 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
         draft: false
         prerelease: false
 
     - name: Upload Release Assets
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
       with:
+        tag_name: v${{ github.run_number }}
         files: |
-          ./artifacts/dist-macos-latest/*.dmg
-          ./artifacts/dist-macos-latest/*.zip
-          ./artifacts/dist-ubuntu-latest/*.AppImage
-          ./artifacts/dist-ubuntu-latest/*.deb
-          ./artifacts/dist-ubuntu-latest/*.rpm
-          ./artifacts/dist-windows-latest/*.exe
-          ./artifacts/dist-windows-latest/*.msi
+          ./artifacts/*.exe
+          ./artifacts/*.msi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

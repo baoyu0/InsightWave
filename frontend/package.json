@@ -13,9 +13,9 @@
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder",
+    "dist:windows": "npm run build && electron-builder --win",
     "test": "echo \"No tests specified\" && exit 0",
-    "lint": "eslint src/**/*.js",
-    "dist:debug": "npm run build && electron-builder --publish always --debug"
+    "lint": "eslint src/**/*.js"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
@@ -30,11 +30,9 @@
     ],
     "win": {
       "target": [
-        "nsis"
+        "nsis",
+        "msi"
       ]
-    },
-    "linux": {
-      "target": ["AppImage", "snap"]
     },
     "publish": [
       {
