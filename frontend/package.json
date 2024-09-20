@@ -20,7 +20,7 @@
     "dist:windows": "npm run build && electron-builder --win --x64",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "eslint src/**/*.js",
-    "version": "npm version patch -m \"Bump version to %s [skip ci]\" && git push && git push --tags"
+    "version": "echo \"版本更新完成\""
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
