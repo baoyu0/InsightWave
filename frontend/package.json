@@ -17,10 +17,10 @@
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder",
-    "dist:windows": "npx version-bump-prompt --commit --tag --push && npm run build && electron-builder --win --x64",
+    "dist:windows": "npm run build && electron-builder --win --x64",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "eslint src/**/*.js",
-    "version": "version-bump-prompt --commit --tag --push"
+    "version": "npm version patch -m \"Bump version to %s [skip ci]\" && git push && git push --tags"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
