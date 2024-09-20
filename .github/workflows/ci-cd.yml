@@ -115,10 +115,10 @@ jobs:
     - name: Publish to GitHub Releases
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
-        npm run dist || (echo "Publishing failed" && exit 1)
+        npm run dist
 
     - name: Run security scan
       uses: snyk/actions/node@master

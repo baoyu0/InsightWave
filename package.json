@@ -69,7 +69,11 @@
         "owner": "baoyu0",
         "repo": "InsightWave"
       }
-    ]
+    ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
   },
   "author": "",
   "license": "ISC"
