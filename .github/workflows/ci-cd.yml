@@ -65,7 +65,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: dist-windows
-        path: frontend/dist/*.exe
+        path: frontend/dist/*.{exe,zip}
 
   release:
     needs: build-windows
@@ -85,5 +85,6 @@ jobs:
       with:
         files: |
           ./dist/*.exe
+          ./dist/*.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
