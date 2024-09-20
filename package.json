@@ -43,7 +43,7 @@
     "build": "webpack --mode production",
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
-    "dist": "npm run build && electron-builder --publish always",
+    "dist": "electron-builder --publish always",
     "dist:debug": "set DEBUG=electron-builder,electron-builder:* && npm run build && electron-builder --publish always",
     "test": "jest"
   },
