@@ -30,7 +30,7 @@ jobs:
         npm ci
       shell: bash
 
-      - name: Build Electron app
+    - name: Build Electron app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
