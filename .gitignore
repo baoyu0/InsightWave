@@ -130,3 +130,6 @@ Thumbs.db
 .cache
 .history
 .sass-cache
+
+# 不忽略图标文件
+!frontend/build/icon.ico

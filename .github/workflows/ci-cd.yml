@@ -30,34 +30,23 @@ jobs:
         npm ci
       shell: bash
 
+    - name: Check icon file
+      run: |
+        if (Test-Path frontend/build/icon.ico) {
+          echo "Icon file exists"
+        } else {
+          echo "Icon file is missing"
+          exit 1
+        }
+      shell: pwsh
+
     - name: Build Electron app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
-        echo "Node version: $(node -v)"
-        echo "NPM version: $(npm -v)"
-        echo "Current directory: $(Get-Location)"
-        echo "Directory contents:"
-        Get-ChildItem -Recurse
-        echo "Package.json contents:"
-        Get-Content package.json
-        echo "Webpack config contents:"
-        Get-Content webpack.config.js
-        echo "Listing src directory:"
-        Get-ChildItem src -Recurse
-        echo "Checking for build/icon.ico:"
-        Test-Path build/icon.ico
-        echo "Listing build directory:"
-        Get-ChildItem build -Recurse
-        echo "Running npm run dist:windows"
         npm run dist:windows
-        if ($LASTEXITCODE -ne 0) {
-          echo "Build failed with error code $LASTEXITCODE"
-          Get-ChildItem -Recurse dist
-          exit 1
-        }
-      shell: powershell
+      shell: bash
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
@@ -79,20 +68,9 @@ jobs:
         path: artifacts
 
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Assets
       uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        tag_name: v${{ github.run_number }}
         files: |
           ./artifacts/*.exe
           ./artifacts/*.msi
