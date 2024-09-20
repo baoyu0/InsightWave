@@ -37,13 +37,18 @@ jobs:
         cd frontend
         echo "Node version: $(node -v)"
         echo "NPM version: $(npm -v)"
-        echo "Current directory: $(pwd)"
+        echo "Current directory: $(Get-Location)"
         echo "Directory contents:"
-        dir
+        Get-ChildItem
         echo "Package.json contents:"
-        type package.json
+        Get-Content package.json
         echo "Running npm run dist:windows"
-        npm run dist:windows || (echo "Build failed with error code $?" && npm run dist:windows --verbose && exit 1)
+        npm run dist:windows
+        if ($LASTEXITCODE -ne 0) {
+          echo "Build failed with error code $LASTEXITCODE"
+          npm run dist:windows --verbose
+          exit 1
+        }
       shell: powershell
 
     - name: Upload artifacts
