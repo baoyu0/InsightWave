@@ -107,3 +107,8 @@ jobs:
       run: |
         npm version patch
         git push --follow-tags
+
+    - name: Format Python code
+      run: |
+        pip install black
+        black backend

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, abort
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from data_processor import (
     load_data, process_data, get_preview, clean_data, perform_regression,
