@@ -104,7 +104,10 @@ jobs:
         cd frontend
         npm test
 
-    - name: Build Electron app
+    - name: Build and Publish Electron app
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
         npm run dist
@@ -114,14 +117,6 @@ jobs:
       with:
         name: dist
         path: frontend/dist
-
-    - name: Publish to GitHub Releases
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        cd frontend
-        npm run dist
 
     - name: Run security scan
       uses: snyk/actions/node@master
