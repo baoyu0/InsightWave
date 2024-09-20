@@ -18,7 +18,9 @@
     "wait-on": "^7.0.1",
     "webpack": "^5.85.0",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0"
+    "webpack-dev-server": "^4.15.0",
+    "jest": "^29.5.0",
+    "react-test-renderer": "^18.2.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -42,7 +44,8 @@
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder --publish always",
-    "dist:debug": "set DEBUG=electron-builder,electron-builder:* && npm run build && electron-builder --publish always"
+    "dist:debug": "set DEBUG=electron-builder,electron-builder:* && npm run build && electron-builder --publish always",
+    "test": "jest"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
