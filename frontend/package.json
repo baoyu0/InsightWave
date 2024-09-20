@@ -2,7 +2,10 @@
   "name": "data-analysis-visualization-app",
   "version": "1.0.0",
   "description": "数据分析与可视化桌面应用",
-  "author": "",
+  "author": {
+    "name": "dandan",
+    "email": "zhaidandan00@gmail.com"
+  },
   "main": "electron.js",
   "engines": {
     "node": ">=20.0.0"
@@ -30,12 +33,9 @@
       "package.json"
     ],
     "win": {
-      "target": [
-        "nsis",
-        "msi"
-      ],
-      "icon": "build/icon.ico"
-    },
+       "target": ["nsis", "msi"],
+       "icon": "build/icon.ico"
+     }
     "publish": [
       {
         "provider": "github",

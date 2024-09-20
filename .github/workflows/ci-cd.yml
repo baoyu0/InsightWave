@@ -30,7 +30,7 @@ jobs:
         npm ci
       shell: bash
 
-    - name: Build Electron app
+      - name: Build Electron app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -39,7 +39,7 @@ jobs:
         echo "NPM version: $(npm -v)"
         echo "Current directory: $(Get-Location)"
         echo "Directory contents:"
-        Get-ChildItem
+        Get-ChildItem -Recurse
         echo "Package.json contents:"
         Get-Content package.json
         echo "Running npm run dist:windows"
