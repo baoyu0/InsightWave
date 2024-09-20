@@ -37,7 +37,7 @@
         "nsis",
         "msi"
       ],
-      "icon": "build/icon.ico"
+      "icon": "frontend/build/icon.ico"
     }, 
     "publish": [
       {
