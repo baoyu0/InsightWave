@@ -32,7 +32,6 @@ jobs:
 
     - name: Check icon file
       run: |
-
         if (Test-Path frontend/build/icon.ico) {
           echo "Icon file exists"
         } else {
