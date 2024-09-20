@@ -1,0 +1,6 @@
+# 删除根目录的 ESLint 配置文件
+del .eslintrc.json
+del .eslintrc.js
+
+# 删除 frontend 目录下的 eslint.config.mjs
+del frontend\eslint.config.mjs

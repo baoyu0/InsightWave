@@ -1,24 +1,74 @@
 {
-  // ... 其他配置 ...
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:react-hooks/recommended"
-    ],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
-    "rules": {
-      "no-unused-vars": "warn",
-      "react/prop-types": "off"
-    }
-  },
   "devDependencies": {
-    // ... 其他开发依赖 ...
-    "eslint": "^8.45.0",
-    // ... 其他开发依赖 ...
-  }
+    "eslint": "^8.57.1",
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "@eslint/js": "^9.10.0",
+    "babel-loader": "^9.1.2",
+    "concurrently": "^8.0.1",
+    "css-loader": "^6.8.1",
+    "electron": "^25.0.0",
+    "electron-builder": "^24.4.0",
+    "eslint-plugin-react": "^7.36.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "globals": "^15.9.0",
+    "html-webpack-plugin": "^5.5.1",
+    "style-loader": "^3.3.3",
+    "wait-on": "^7.0.1",
+    "webpack": "^5.85.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.2",
+    "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "electron-updater": "^6.1.1",
+    "glob": "^11.0.0",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "rimraf": "^6.0.1"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "electron-dev": "npm run dev && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "npm run build && electron-builder",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint src/**/*.js"
+  },
+  "build": {
+    "appId": "com.yourcompany.insightwave",
+    "productName": "InsightWave",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist/**/*",
+      "electron.js",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "baoyu0",
+        "repo": "InsightWave"
+      }
+    ]
+  },
+  "author": "",
+  "license": "ISC"
 }
