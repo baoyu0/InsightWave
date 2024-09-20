@@ -23,6 +23,20 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
 
+    - name: Check electron-log installation
+      run: |
+        cd frontend
+        npm list electron-log || npm install electron-log
+      shell: bash
+      
+    - name: Build Electron app
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+          cd frontend
+          npm run dist:windows
+      shell: bash
+
     - name: Install dependencies
       run: |
         npm install -g npm@latest

@@ -99,3 +99,16 @@ process.on('uncaughtException', (error) => {
   log.error('Uncaught exception:', error);
   dialog.showErrorBox('错误', '发生了一个未知错误。请重新启动应用程序。');
 });
+
+let log;
+try {
+  log = require('electron-log');
+} catch (error) {
+  console.error('Failed to load electron-log:', error);
+  log = {
+    info: console.log,
+    error: console.error,
+    warn: console.warn,
+    debug: console.debug
+  };
+}
