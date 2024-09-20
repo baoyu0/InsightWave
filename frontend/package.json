@@ -15,7 +15,7 @@
     "dist": "npm run build && electron-builder",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "eslint src/**/*.js",
-    "dist:debug": "npm run build && electron-builder --publish always"
+    "dist:debug": "npm run build && electron-builder --publish always --debug"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
