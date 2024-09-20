@@ -19,6 +19,8 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -34,10 +36,10 @@ jobs:
     - name: Update version
       run: |
         cd frontend
-        npm version patch -m "Bump version to %s [skip ci]"
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
-        git push
+        npm version patch -m "Bump version to %s [skip ci]"
+        git push origin HEAD:main
         git push --tags
       shell: bash
 
