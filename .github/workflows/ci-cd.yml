@@ -25,6 +25,26 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
 
+    - name: Setup Git
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'github-actions@github.com'
+      shell: bash
+
+    - name: Update version
+      run: |
+        cd frontend
+        npm run version
+      shell: bash
+
+    - name: Build Electron app
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+          cd frontend
+          npm run dist:windows
+      shell: bash
+
     - name: Install dependencies
       run: |
         npm install -g npm@latest
