@@ -46,7 +46,7 @@ jobs:
         npm run dist:windows
         if ($LASTEXITCODE -ne 0) {
           echo "Build failed with error code $LASTEXITCODE"
-          npm run dist:windows --verbose
+          Get-ChildItem -Recurse dist
           exit 1
         }
       shell: powershell

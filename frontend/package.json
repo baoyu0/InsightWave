@@ -2,6 +2,7 @@
   "name": "data-analysis-visualization-app",
   "version": "1.0.0",
   "description": "数据分析与可视化桌面应用",
+  "author": "",
   "main": "electron.js",
   "engines": {
     "node": ">=20.0.0"
@@ -13,7 +14,7 @@
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder",
-    "dist:windows": "npm run build && electron-builder --win",
+    "dist:windows": "npm run build && electron-builder --win --x64",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "eslint src/**/*.js"
   },
@@ -32,7 +33,8 @@
       "target": [
         "nsis",
         "msi"
-      ]
+      ],
+      "icon": "build/icon.ico"
     },
     "publish": [
       {
@@ -44,7 +46,6 @@
       }
     ]
   },
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.22.0",
@@ -55,7 +56,7 @@
     "concurrently": "^8.0.1",
     "css-loader": "^6.8.1",
     "electron": "^25.0.0",
-    "electron-builder": "^24.4.0",
+    "electron-builder": "^24.13.3",
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.36.1",
     "eslint-plugin-react-hooks": "^4.6.2",
