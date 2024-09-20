@@ -19,7 +19,8 @@
     "dist": "npm run build && electron-builder",
     "dist:windows": "npm run build && electron-builder --win --x64",
     "test": "echo \"No tests specified\" && exit 0",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "version": "version-bump-prompt --commit --tag --push"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
@@ -68,6 +69,7 @@
     "globals": "^15.9.0",
     "html-webpack-plugin": "^5.5.1",
     "style-loader": "^3.3.3",
+    "version-bump-prompt": "^6.1.0",
     "wait-on": "^7.0.1",
     "webpack": "^5.85.0",
     "webpack-cli": "^5.1.1",
@@ -80,13 +82,13 @@
     "@mui/material": "^5.13.2",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
+    "electron-log": "^4.4.8",
     "electron-updater": "^6.1.1",
     "glob": "^11.0.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-     "electron-log": "^4.4.8",
     "rimraf": "^6.0.1"
   }
 }
