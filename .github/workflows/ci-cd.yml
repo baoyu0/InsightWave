@@ -28,10 +28,23 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
 
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
     - name: Run Python tests
       run: |
         cd backend
         python -m unittest discover tests
+
+    - name: Run Python linter
+      run: |
+        pip install flake8
+        flake8 backend
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -42,6 +55,19 @@ jobs:
       run: |
         cd frontend
         npm ci
+
+    - name: Cache Node.js dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Run JavaScript linter
+      run: |
+        cd frontend
+        npm run lint
 
     - name: Build frontend
       run: |
@@ -70,3 +96,14 @@ jobs:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         npx electron-builder --publish always
+
+    - name: Run security scan
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+    - name: Bump version and push tag
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        npm version patch
+        git push --follow-tags
