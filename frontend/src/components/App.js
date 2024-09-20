@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { 
   Container, Typography, Box, Button, Select, MenuItem, 
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
-  Grid, Card, CardContent, TextField, FormControl, InputLabel, CircularProgress, Snackbar
+  Grid, Card, CardContent, CircularProgress, Snackbar
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -15,6 +15,7 @@ const theme = createTheme();
 const API_URL = 'http://localhost:5000';
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
   const [file, setFile] = useState(null);
   const [data, setData] = useState(null);
   const [columns, setColumns] = useState([]);
@@ -26,15 +27,21 @@ function App() {
   const [selectedXColumns, setSelectedXColumns] = useState([]);
   const [selectedYColumn, setSelectedYColumn] = useState('');
   const [timeSeriesResult, setTimeSeriesResult] = useState(null);
-  const [groupByColumn, setGroupByColumn] = useState('');
-  const [aggColumn, setAggColumn] = useState('');
-  const [aggFunc, setAggFunc] = useState('');
   const [groupAggResult, setGroupAggResult] = useState(null);
-  const [preprocessMethod, setPreprocessMethod] = useState('');
-  const [preprocessColumns, setPreprocessColumns] = useState([]);
   const [preprocessedData, setPreprocessedData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
+
+  // eslint-disable-next-line no-unused-vars
+  const [groupByColumn, setGroupByColumn] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [aggColumn, setAggColumn] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [aggFunc, setAggFunc] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [preprocessMethod, setPreprocessMethod] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [preprocessColumns, setPreprocessColumns] = useState([]);
 
   const onDrop = useCallback((acceptedFiles) => {
     handleFileUpload(acceptedFiles[0]);

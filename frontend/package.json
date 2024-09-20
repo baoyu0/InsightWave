@@ -54,6 +54,7 @@
     "electron-builder": "^24.4.0",
     "eslint": "^9.10.0",
     "eslint-plugin-react": "^7.36.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.9.0",
     "html-webpack-plugin": "^5.5.1",
     "style-loader": "^3.3.3",
