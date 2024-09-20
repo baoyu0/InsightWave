@@ -34,18 +34,6 @@ jobs:
         npm ci
       shell: bash
 
-    - name: List frontend directory
-      run: |
-        cd frontend
-        ls -la
-      shell: bash
-
-    - name: Check package.json
-      run: |
-        cd frontend
-        cat package.json
-      shell: bash
-
     - name: Build and Publish Electron app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -83,24 +71,22 @@ jobs:
         npm install -g npm@latest
         cd frontend
         npm ci
-      
-    - name: List frontend directory
-      run: |
-        cd frontend
-        ls -la
-
-    - name: Check package.json
-      run: |
-        cd frontend
-        cat package.json
 
     - name: Build and Publish Electron app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
-        npm run dist:macos-latest || (echo "Build failed" && exit 1)
-      
+        echo "Node version: $(node -v)"
+        echo "NPM version: $(npm -v)"
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+        echo "Package.json contents:"
+        cat package.json
+        echo "Running npm run dist:macos-latest"
+        npm run dist:macos-latest || (echo "Build failed with error code $?" && npm run dist:macos-latest --verbose && exit 1)
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
