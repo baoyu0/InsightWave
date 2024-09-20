@@ -114,7 +114,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         cd frontend
-        npm run dist
+        npm run dist:${{ matrix.os }}
       shell: bash
 
     - name: Upload artifacts
@@ -131,12 +131,16 @@ jobs:
         git diff-index --quiet HEAD || git commit -m "Auto-commit changes"
 
     - name: Bump version and push tag
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        cd frontend  # 确保在正确的目录中执行 npm 命令
+        cd frontend
         npm version patch
+        NEW_VERSION=$(node -p "require('./package.json').version")
+        git add package.json
+        git commit -m "Bump version to $NEW_VERSION"
+        git tag -a "v$NEW_VERSION" -m "Version $NEW_VERSION"
         git push --follow-tags
 
     - name: Push changes
@@ -175,11 +179,16 @@ jobs:
         prerelease: false
 
     - name: Upload Release Assets
-      uses: actions/upload-release-asset@v1
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          ./artifacts/dist-macos-latest/*.dmg
+          ./artifacts/dist-macos-latest/*.zip
+          ./artifacts/dist-ubuntu-latest/*.AppImage
+          ./artifacts/dist-ubuntu-latest/*.deb
+          ./artifacts/dist-ubuntu-latest/*.rpm
+          ./artifacts/dist-windows-latest/*.exe
+          ./artifacts/dist-windows-latest/*.msi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/dist-*/*
-        asset_name: InsightWave-${{ matrix.os }}.${{ matrix.ext }}
-        asset_content_type: application/octet-stream
