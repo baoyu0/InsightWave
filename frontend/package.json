@@ -13,7 +13,8 @@
     "electron-dev": "npm run dev && electron .",
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder",
-    "test": "echo \"No tests specified\" && exit 0"
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint src/**/*.js"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
@@ -45,11 +46,15 @@
     "@babel/core": "^7.22.0",
     "@babel/preset-env": "^7.22.0",
     "@babel/preset-react": "^7.22.0",
+    "@eslint/js": "^9.10.0",
     "babel-loader": "^9.1.2",
     "concurrently": "^8.0.1",
     "css-loader": "^6.8.1",
     "electron": "^25.0.0",
     "electron-builder": "^24.4.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-react": "^7.36.1",
+    "globals": "^15.9.0",
     "html-webpack-plugin": "^5.5.1",
     "style-loader": "^3.3.3",
     "wait-on": "^7.0.1",
