@@ -1,9 +1,30 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [created]
+
 jobs:
   build:
-    # ... 其他配置 ...
+    runs-on: ubuntu-latest
     steps:
-      # ... 其他步骤 ...
-      - name: Build and publish
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npm run dist
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm ci
+    - name: Build and publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd frontend
+        npm run dist:debug

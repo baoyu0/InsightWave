@@ -14,7 +14,8 @@
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "test": "echo \"No tests specified\" && exit 0",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "dist:debug": "npm run build && electron-builder --publish always"
   },
   "build": {
     "appId": "com.yourcompany.insightwave",
@@ -32,11 +33,16 @@
         "nsis"
       ]
     },
+    "linux": {
+      "target": ["AppImage", "snap"]
+    },
     "publish": [
       {
         "provider": "github",
         "owner": "baoyu0",
-        "repo": "InsightWave"
+        "repo": "InsightWave",
+        "private": false,
+        "releaseType": "release"
       }
     ]
   },
