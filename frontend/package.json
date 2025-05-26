@@ -91,7 +91,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.16.8",
+    "@mui/material": "^7.0.0",
     "axios": "^1.8.4",
     "chart.js": "^4.4.8",
     "electron-log": "^4.4.8",
